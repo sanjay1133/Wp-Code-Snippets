@@ -1,4 +1,4 @@
-# Code Snippets
+# WP Code Snippets
 
 ###### Author: [Galaxy Weblinks](https://www.galaxyweblinks.com/)
 
