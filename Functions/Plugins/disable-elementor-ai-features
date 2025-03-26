@@ -1,0 +1,26 @@
+/**
+ * two functions to disable the AI "feature" on Elementor
+ * @src: https://github.com/orgs/elementor/discussions/22853#discussioncomment-9262142
+ * @src: https://github.com/orgs/elementor/discussions/22853#discussioncomment-9290564
+ */
+
+add_action( 'elementor/element/before_section_start', 'so_remove_ai_control', 10, 3 );
+add_action( 'elementor/editor/after_enqueue_scripts', 'so_remove_elementor_ai_script_from_editor' );
+
+function so_remove_ai_control( $element, $section_id, $args ) {
+
+		foreach( $element->get_controls() as $control ) {
+			$element->update_control(
+				$control['name'],
+				[
+					'ai' => false,
+				]
+			);
+		}
+}
+
+function so_remove_elementor_ai_script_from_editor() {
+    if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
+        wp_dequeue_script( 'elementor-ai' );
+    }
+}
